@@ -1,10 +1,5 @@
 const User = require('../models/users.model');
 
-//Simple version, without validation or sanitation
-exports.test = (req, res) => {
-    res.send('Greetings from the Test controdsadsadsdsller!');
-};
-
 exports.user_create = function (req, res, next) {
     let user = new User(
         {
@@ -29,8 +24,6 @@ exports.user_details = function (req, res, next) {
 };
 
 exports.user_update = function (req, res, next) {
-  console.log('REQ ',req.body)
-  // console.log('RES ',res)
     User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, user) {
         if (err) return next(err);
         res.send('User updated.');
