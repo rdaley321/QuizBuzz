@@ -16,6 +16,9 @@ app.listen(port, () => {
 
 // Set up mongoose connection
 const mongoose = require('mongoose');
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 let dev_db_url = 'mongodb+srv://ryan:2gE3U8dYJM9GtBa@quizbuzz-kk5m8.mongodb.net/test?retryWrites=true';
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB);

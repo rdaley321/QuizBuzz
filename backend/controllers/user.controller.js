@@ -29,8 +29,17 @@ exports.user_details = function (req, res, next) {
 };
 
 exports.user_update = function (req, res, next) {
+  console.log('REQ ',req.body)
+  // console.log('RES ',res)
     User.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, user) {
         if (err) return next(err);
         res.send('User updated.');
     });
+};
+
+exports.user_delete = function (req, res, next) {
+    User.findByIdAndRemove(req.params.id, function (err) {
+        if (err) return next(err);
+        res.send('Deleted successfully!');
+    })
 };
