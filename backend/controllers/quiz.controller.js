@@ -16,11 +16,16 @@ exports.quiz_create = function (req, res, next) {
     })
 };
 
-exports.quiz_details = function (req, res, next) {
-    Quiz.findById(req.params.id, function (err, quiz) {
-        if (err) return next(err);
-        res.send(quiz);
-    })
+exports.quiz_details = (req, res, next) => {
+    Quiz
+      .findById(req.params.id)
+      .populate('questions')
+      .populate('answers')
+      .populate('results')
+      .exec((err, quiz) => {
+          if (err) return next(err)
+          res.send(quiz);
+      })
 };
 
 exports.quiz_update = function (req, res, next) {
