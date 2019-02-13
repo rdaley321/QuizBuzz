@@ -4,7 +4,7 @@ exports.question_create = function (req, res, next) {
     let question = new Question(
         {
             text: req.body.text,
-            placement: req.body.placement
+            placement: req.body.placement,
             img_url: req.body.img_url,
             quiz_id: req.body.quiz_id
         }
