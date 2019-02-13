@@ -9,10 +9,10 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/quizzes', quiz);
-app.use('/questions', question);
-app.use('/results', result);
-app.use('/answers', answer);
+app.use('/quiz', quiz);
+app.use('/question', question);
+app.use('/result', result);
+app.use('/answer', answer);
 
 let port = 1234;
 
