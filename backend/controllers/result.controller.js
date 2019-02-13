@@ -1,19 +1,26 @@
 const Result = require('../models/results.model');
+const Quiz = require('../models/quizzes.model');
 
 exports.result_create = function (req, res, next) {
     let result = new Result(
         {
-            resultname: req.body.resultname,
-            password: req.body.password
+            title: req.body.title,
+            img_url: req.body.img_url,
+            blurb: req.body.blurb
         }
     );
 
-    result.save(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.send('Result Created successfully')
-    })
+    Quiz.findById(req.params.id, (err, quiz) => {
+        if(err) return res.status(400).send('Cannot Update Quiz with this Result.')
+        quiz.results.push(result)
+        quiz.save()
+        result.save(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.send('Result Created successfully')
+        })
+    });
 };
 
 exports.result_details = function (req, res, next) {

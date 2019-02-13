@@ -1,22 +1,26 @@
 const Answer = require('../models/answers.model');
+const Question = require('../models/questions.model')
 
 exports.answer_create = function (req, res, next) {
     let answer = new Answer(
         {
             text: req.body.text,
             placement: req.body.placement,
-            img_url: req.body.img_url,
-            question_id: req.body.question_id,
-            result_id: req.body.result_id
+            img_url: req.body.img_url
         }
     );
 
-    answer.save(function (err) {
-        if (err) {
-            return next(err);
-        }
-        res.send('Answer Created successfully')
-    })
+    Question.findById(req.params.id, (err, question) => {
+        if(err) return res.status(400).send('Cannot Update Question with this answer.')
+        question.answers.push(answer)
+        question.save()
+        answer.save(function (err) {
+            if (err) {
+                return next(err);
+            }
+            res.send('Answer Created successfully')
+        })
+    });
 };
 
 exports.answer_details = function (req, res, next) {

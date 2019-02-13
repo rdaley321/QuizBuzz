@@ -5,7 +5,7 @@ let QuestionSchema = new Schema({
   text: {type: String, required: true},
   placement: {type: Number, required: true},
   img_url: {type: String},
-  quiz_id: {type : mongoose.Schema.Types.ObjectId, ref : 'Quiz'}
+  answers: [ {type : mongoose.Schema.Types.ObjectId, ref : 'Answer'} ]
 })
 
 module.exports = mongoose.model('Question', QuestionSchema);
