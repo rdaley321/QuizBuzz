@@ -12,7 +12,7 @@ exports.quiz_create = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        res.send('Quiz Created successfully')
+        res.send(quiz)
     })
 };
 

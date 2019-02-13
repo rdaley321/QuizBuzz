@@ -1,4 +1,4 @@
-const Question = require('../models/question.model');
+const Question = require('../models/questions.model');
 
 exports.question_create = function (req, res, next) {
     let question = new Question(

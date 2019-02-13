@@ -5,8 +5,8 @@ exports.answer_create = function (req, res, next) {
         {
             text: req.body.text,
             placement: req.body.placement,
-            img_url: req.body.img_url
-            question_id: req.body.question_id
+            img_url: req.body.img_url,
+            question_id: req.body.question_id,
             result_id: req.body.result_id
         }
     );
