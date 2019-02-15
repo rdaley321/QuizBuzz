@@ -47,3 +47,20 @@ exports.quiz_delete = function (req, res, next) {
         res.send('Deleted successfully!');
     })
 };
+
+exports.quiz_all = (req, res, next) => {
+  Quiz.find()
+    .populate('questions')
+    .populate({
+       path: 'questions',
+       populate: {
+         path: 'answers',
+         model: 'Answer'
+       }
+    })
+    .populate('results')
+    .exec((err, quizzes) => {
+        if (err) return next(err)
+        res.send(quizzes);
+    })
+}

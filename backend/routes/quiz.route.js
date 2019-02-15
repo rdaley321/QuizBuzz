@@ -9,4 +9,5 @@ router.delete('/:id/delete', quiz_controller.quiz_delete);
 router.put('/:id/update', quiz_controller.quiz_update);
 router.get('/:id', quiz_controller.quiz_details);
 router.post('/create', quiz_controller.quiz_create);
+router.get('/', quiz_controller.quiz_all)
 module.exports = router;
