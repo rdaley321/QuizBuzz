@@ -20,7 +20,13 @@ exports.quiz_details = (req, res, next) => {
     Quiz
       .findById(req.params.id)
       .populate('questions')
-      .populate('answers')
+      .populate({
+         path: 'questions',
+         populate: {
+           path: 'answers',
+           model: 'Answer'
+         }
+      })
       .populate('results')
       .exec((err, quiz) => {
           if (err) return next(err)

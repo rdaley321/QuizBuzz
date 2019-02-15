@@ -18,18 +18,22 @@ exports.question_create = function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            res.send('Question Created successfully')
+            res.send(question)
         })
     });
 
 
+
 };
 
-exports.question_details = function (req, res, next) {
-    Question.findById(req.params.id, function (err, question) {
-        if (err) return next(err);
-        res.send(question);
-    })
+exports.question_details = (req, res, next) => {
+    Question
+      .findById(req.params.id)
+      .populate('answers')
+      .exec((err, question) => {
+          if (err) return next(err)
+          res.send(question);
+      })
 };
 
 exports.question_update = function (req, res, next) {
